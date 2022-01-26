@@ -55,13 +55,13 @@ function addNewA() {
 async function updateFilterPhase(allPassCoeff){
     const { zeros, poles } = filter_plane.getZerosPoles(radius)
     const { angels: allPassAngels } = await postData(
-        API,
+        `${API}/getAllPassFilter`,
         {
             a: allPassCoeff,
         }
     )
     const { w, angels: finalFilterPhase } = await postData(
-        API,
+        `${API}/getFinalFilter`,
         {
             zeros,
             poles,
