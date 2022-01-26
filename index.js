@@ -3,6 +3,7 @@ const filterDesignPhase = document.querySelector('#filter-phase-response')
 const allPassPhase = document.getElementById('all-pass-phase-response');
 const finalPhase = document.getElementById('final-filter-phase-response');
 const checkList = document.getElementById('list1');
+const API = "http://mohamedibrahim01.pythonanywhere.com"
 
 
 document.querySelector('#listOfA').addEventListener('input', updateAllPassCoeff)
@@ -21,7 +22,6 @@ async function postData(url = '', data = {}) {
     return response.json()
 }
 
-        
 async function updateFilterDesign(data) {
     data.gain = 1
     let { w, angels, magnitude } = await postData(`${API}/getFilter`, data)
@@ -55,13 +55,13 @@ function addNewA() {
 async function updateFilterPhase(allPassCoeff){
     const { zeros, poles } = filter_plane.getZerosPoles(radius)
     const { angels: allPassAngels } = await postData(
-        'http://127.0.0.1:8080/getAllPassFilter',
+        API,
         {
             a: allPassCoeff,
         }
     )
     const { w, angels: finalFilterPhase } = await postData(
-        'http://127.0.0.1:8080/getFinalFilter',
+        API,
         {
             zeros,
             poles,
