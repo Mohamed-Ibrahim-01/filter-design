@@ -82,8 +82,6 @@ const s = (p5_inst) => {
                 curr_picked.item.conjugate.center = curr_picked.item.point.getConjugate().center
             }
         }
-        updateFilterDesign(filter_plane.getZerosPoles(radius))
-        updateAllPassCoeff()
         drawCursor()
         p5_inst.redraw()
     }
